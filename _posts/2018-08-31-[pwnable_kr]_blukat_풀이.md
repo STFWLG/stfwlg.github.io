@@ -7,7 +7,7 @@ tags: "#UnKN0wn"
 ---
 >## blukat - [3pt]
 ### Sometimes, pwnable is strange...
-### hint: if this challenge is hard, you are a skilled player.<br>
+### hint: if this challenge is hard, you are a skilled player.<br><br>
 ### ssh blukat@pwnable.kr -p2222 (pw: guest)
 
 ---
