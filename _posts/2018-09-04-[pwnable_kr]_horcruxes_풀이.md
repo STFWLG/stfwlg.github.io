@@ -27,7 +27,9 @@ ssh로 연결해보면 `horcruxes`와 `readme`라는 파일이 있어요.
 ![init_ABCDEFG](/pic/pwnable_kr/horcruxes/hor_init_ABCDEFG.png)
 {: refdef}
 
-<center> ___init_ABCDEFG 함수___ </center>
+{: refdef: style="text-align: center;"}
+***init_ABCDEFG 함수***
+{: refdef}
 
 전역변수 a,b,c,d,e,f,g의 값을 랜덤으로 정해주고 모든 합을 sum에 저장하는 함수인거 같네요
 
