@@ -35,7 +35,9 @@ ssh로 연결해보면 `horcruxes`와 `readme`라는 파일이 있어요.
 ![ropme](/pic/pwnable_kr/horcruxes/hor_ropme.png)
 {: refdef}
 
-<center> \<ropme 함수> </center>
+{: refdef: style="text-align: center;"}
+***ropme 함수*** 
+{: refdef}
 
 각 A,B,C,D,E,F,G 함수는 각각의 변수들의 값을 출력해주는 함수가 있어요
 
