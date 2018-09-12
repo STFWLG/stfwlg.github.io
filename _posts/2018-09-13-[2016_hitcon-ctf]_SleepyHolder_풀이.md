@@ -79,7 +79,7 @@ func_wipe(1)
 
 `small_secret`을 한 번 더 `free`해준 이후에 `small_secret`을 새로 할당해도 `big_secret`의 `prev_inuse` 값은 그대로라서 `big_secret`을 `free`하면 `unsafe_unlink`를 사용할 수 있어요.
 
-`small_secret`안에 `fake_chunk`를 만들고 `big_secret`의 `prev_size`를 `0x20`으로 조작하면 `big_secret`이 `free`되면서 `prev_inuse`가 `0`인걸 보고 `big_secret - prev_size - 0x10 **(HEADER)**`에서 `unlink`가 실행돼요.
+`small_secret`안에 `fake_chunk`를 만들고 `big_secret`의 `prev_size`를 `0x20`으로 조작하면 `big_secret`이 `free`되면서 `prev_inuse`가 `0`인걸 보고 `big_secret - prev_size - 0x10`에서 `unlink`가 실행돼요.
 
 `big_chunk`의 `prev_size`가 `0x30`에서 `0x20`으로 바뀌어서 `fake_chunk`의 `fd`, `bk`를 가지고 `unlink`가 실행돼여.
 
