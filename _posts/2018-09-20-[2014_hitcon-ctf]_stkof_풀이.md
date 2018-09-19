@@ -16,7 +16,7 @@ tags: rotles98
 
 `unsafe_unlink` 문제!
 
-**참고** `glibc` 버전이 `2.26`보다 낮아야 `unsafe_unlink`를 사용할 수 있어요. (제가 사용중인 `ubuntu 16.04.5 64bit`는 `glibc 2.23`이에요.)
+**참고:** `glibc` 버전이 `2.26`보다 낮아야 `unsafe_unlink`를 사용할 수 있어요. (제가 사용중인 `ubuntu 16.04.5 64bit`는 `glibc 2.23`이에요.)
 
 `unsafe_unlink`는 `fake_chunk`를 만들 수 있고 `prev_size`, `prev_inuse`를 바꿀 수 있고 `chunk`의 주소를 가지는 `bss`나 `stack` 같은 곳의 주소를 알 때 사용할 수 있어요.
 
@@ -27,8 +27,7 @@ tags: rotles98
 ![checksec](/img/2014_hitcon-ctf/stkof/01.png)
 {: refdef}
 
-힙 공부하면서 느낀건 `PIE`나 `FULL RELRO`만 아니면 보호기법 없는거나 마찬가지라 편함!
-
+힙 공부하면서 느낀건 `PIE`나 `FULL RELRO`만 아니면 보호기법 없는거나 마찬가지라 편함!<br /><br />
 `IDA`로 열어보면 네 가지 함수를 사용할 수 있어요.
 
 ### `func_malloc`
@@ -37,21 +36,17 @@ tags: rotles98
 
 2. `index` 1 증가
 
-2. `chunk_list[index]`에 `chunk `주소 저장
-
+2. `chunk_list[index]`에 `chunk `주소 저장<br /><br />
 ### `func_read`
 
 1. `index`, `size` 입력
 
-2. `chunk` 크기에 상관없이 입력받음 **bof**
-
+2. `chunk` 크기에 상관없이 입력받음 **(!!bof!!)**<br /><br />
 ### `func_free`
 
 1. `index` 입력
 
-2. 해당 `chunk`를 `free`한 후 `chunk[index]`을 초기화 (`index`를 감소시키지는 않음)
-
-
+2. 해당 `chunk`를 `free`한 후 `chunk[index]`을 초기화 (`index`를 감소시키지는 않음)<br /><br />
 ### `func_len_check`
 
 1. `index` 입력
@@ -102,11 +97,13 @@ func_read(2, payload)
 
 `chunk_list + 0x10`은 `2 chunk`의 데이터 부분을 가르키는데 이 부분은 `fake_chunk`의 `header`주소랑 같아요.
 
-`-0x18`, `-0x10`을 한 이유는 `unlink` 전에 검사하는 부분 때문이에요.
+`-0x18`, `-0x10`을 한 이유는 검사하는 부분 때문이에요.
 
-`fake_chunk`의 `fd` 부분에 `자신의 주소가 적힌 주소 - 0x18`을 적어주면 `fake_chunk -> fd -> bk`에서 `fake_chunk -> fd`가 `&fake_chunk - 0x18`이랑 같아지고 `&fake_chunk - 0x18 -> bk`는 `fake_chunk`랑 같아져요.
+`fake_chunk`의 `fd` 부분에 `&fake_chunk - 0x18`을 적어주면 `fake_chunk -> fd -> bk`에서 `fake_chunk -> fd`가 `&fake_chunk - 0x18`이랑 같아지고 `&fake_chunk - 0x18 -> bk`는 `fake_chunk`랑 같아져요.
 
-왜냐하면 `chunk`의 생김새를 보면 **[prev_size] [size] [fd] [bk]** 이렇게 생겨서 `특정 주소`의 `fd`는 `*(특정 주소 + 0x10)`이랑 같아요. 마찬가지로 `bk`는 `+ 0x18`이랑 같아요.
+왜 그렇냐면 `chunk`의 생김새를 봤을 때 **[prev_size] [size] [fd] [bk]** 이렇게 생겨서 그래요. `특정 주소`의 `fd`는 `특정 주소 + 0x10`고 `bk`는 `+ 0x18`이라고 생각하면 쉬워요.
+
+위 방법으로 검사하는 부분을 우회하고 `unlink`가 실행돼요.
 
 {: refdef: style="text-align: center;"}
 ![fake_chunk](/img/2014_hitcon-ctf/stkof/03.png)
@@ -115,9 +112,9 @@ func_read(2, payload)
 
 이제 `3 chunk`를 `free`하면 `unlink`가 실행돼요. 그러면 **1421**코드가 실행되면서 `chunk_list + 0x10 = chunk_list + 0x10 - 0x10`이 됐다가 **1422**코드가 실행되면 다시 `chunk_list + 0x10 = chunk_list + 0x10 - 0x18`이 들어가요.
 
-결론은 `chunk_list - 0x8`부터 원하는 값을 넣을 수 있어요.
+결국 `chunk_list + 0x10`에 `2 chunk`의 주소 대신 `chunk_list - 0x8`가 들어가서 그 부분부터 `func_read(2, data)`로 `chunk_list`에 원하는 값을 넣을 수 있어요.
 
-`chunk_list`의 값을 바꿀 수 있으면 원하는 곳에서 `func_read`를 실행시킬 수 있어요.
+`chunk_list`의 값을 바꿀 수 있으면 `chunk`의 주소를 마음대로 바꿀 수 있어서 원하는 곳에서 `func_read`를 실행시킬 수 있어요.
 
 - - -
 # 0x02. 공격 방법
