@@ -37,16 +37,19 @@ tags: rotles98
 2. `index` 1 증가
 
 2. `chunk_list[index]`에 `chunk `주소 저장<br /><br />
+
 ### `func_read`
 
 1. `index`, `size` 입력
 
 2. `chunk` 크기에 상관없이 입력받음 **(!!bof!!)**<br /><br />
+
 ### `func_free`
 
 1. `index` 입력
 
 2. 해당 `chunk`를 `free`한 후 `chunk[index]`을 초기화 (`index`를 감소시키지는 않음)<br /><br />
+
 ### `func_len_check`
 
 1. `index` 입력
