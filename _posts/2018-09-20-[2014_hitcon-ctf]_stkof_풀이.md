@@ -28,6 +28,7 @@ tags: rotles98
 {: refdef}
 
 힙 공부하면서 느낀건 `PIE`나 `FULL RELRO`만 아니면 보호기법 없는거나 마찬가지라 편함!<br /><br />
+
 `IDA`로 열어보면 네 가지 함수를 사용할 수 있어요.
 
 ### `func_malloc`
