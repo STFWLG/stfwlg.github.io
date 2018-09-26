@@ -50,7 +50,7 @@ tags: rotles98
 `robot_list`
 
 {: refdef: style="text-align: center;"}
-![robot_list](/img/2017_Insomni'hack/WheelOfRobot/02.png)
+![robot_list](/img/2017_Insomni'hack/WheelOfRobots/02.png)
 {: refdef}
 
 이 문제는 `robot_name`, `robot_flag`, `robot_len`까지 다 `bss`에 저장돼 있어요.
