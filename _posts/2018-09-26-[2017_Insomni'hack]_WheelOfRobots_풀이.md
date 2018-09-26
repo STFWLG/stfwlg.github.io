@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[2017_Insomni'hack] WheelOfRobots 풀이"
+title: "[2017 Insomni'hack] WheelOfRobots 풀이"
 date: 2018-09-26 04:44
 categories: "[Pwn]CTF"
 tags: rotles98
