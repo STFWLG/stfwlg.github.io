@@ -70,7 +70,7 @@ tags: rotles98
 
 3. `func_delete(2)`
 
-4. `func_add(5)`, `robot_2_flag = 1`
+4. `func_add(5)` -> `fastbin_dup_consolidate`, `1byte overflow` -> `robot_2_flag = 1`
 
 5. `func_change(2)`를 사용해 `fake_chunk`를 만듦
 
