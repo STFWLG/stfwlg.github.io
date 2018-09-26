@@ -31,7 +31,7 @@ tags: rotles98
 
 `IDA`로 열어보면 네 가지 함수를 사용할 수 있어요.
 
-### `func_malloc`
+`func_malloc`
 
 1. `size`만큼 `malloc`
 
@@ -39,19 +39,19 @@ tags: rotles98
 
 2. `chunk_list[index]`에 `chunk `주소 저장<br /><br />
 
-### `func_read`
+`func_read`
 
 1. `index`, `size` 입력
 
 2. `chunk` 크기에 상관없이 입력받음 **(!!bof!!)**<br /><br />
 
-### `func_free`
+`func_free`
 
 1. `index` 입력
 
 2. 해당 `chunk`를 `free`한 후 `chunk[index]`을 초기화 (`index`를 감소시키지는 않음)<br /><br />
 
-### `func_len_check`
+`func_len_check`
 
 1. `index` 입력
 
