@@ -92,6 +92,8 @@ struct chunk
 ![heap](/img/2015_plaid-ctf/plaiddb/02.png)
 {: refdef}
 
+`func_DEL`의 `malloc(key_input)`은 좁아서 안 적음
+
 맨 밑에는 `row_key`의 `size`가 커지는 순서
 
 - - -
