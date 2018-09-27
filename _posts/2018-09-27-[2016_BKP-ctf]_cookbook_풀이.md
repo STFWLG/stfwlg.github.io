@@ -116,7 +116,7 @@ s.sendline("q")
 
 이건 처음에 고민 좀 했는데 왜냐하면 `recipe_menu - [n]ew recipe`는 `calloc`을 사용해서 **uaf**같은걸 사용할 수 없었어요.
 
-그러다 `main_menu - [g]ive your cookbook a name!`를 찾았어요.
+그러다 `main_menu - [g]ive your cookbook a name!`을 찾았어요.
 
 `leak`하는 방법은 `free`된 `my_recipe`랑 같은 크기로 할당받아서 같은 곳에 `chunk`를 할당받고 `recipe`의 `ingredient_list`, `ingredient_cal_list` 대신 `특정 함수의 got` 같은걸 넣어서 `heap_leak`처럼 출력하면 `libc_leak`을 할 수 있어요.
 
