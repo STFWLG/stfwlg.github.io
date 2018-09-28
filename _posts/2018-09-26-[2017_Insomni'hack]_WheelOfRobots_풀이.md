@@ -78,7 +78,7 @@ tags: rotles98
 
 7. `robot_2_name`의 주소가 `robot_2_name - 0x18`로 바뀜
 
-8. `func_change(2)`로 `robot_2_name - 0x18`부터 `0x28`만큼 데이터를 바뀌서 `system(/bin/sh)` 실행
+8. `func_change(2)`로 `robot_2_name - 0x18`부터 `0x28`만큼 데이터를 바뀌서 `system("/bin/sh")` 실행
 
 - - -
 # 0x02. 익스플로잇
