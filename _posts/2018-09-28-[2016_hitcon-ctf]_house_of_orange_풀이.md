@@ -58,13 +58,13 @@ tags: rotles98
 - - -
 # 0x01. house_of_orange
 
-우선 이 바이너리도 그렇게 이 기법 자체도 그런데 `free`가 따로 필요없어요.
+우선 바이너리도 그렇고 이 기법 자체도 그런데 `free`가 따로 필요없어요.
 
 그냥 `TOP_chunk`만 적당히 조절해주면 되는데 만약 `0x20fa1`이 원래 `TOP_chunk` 값이면 `0xfa1` 이렇게 바꿔주면 돼요.
 
 그리곤 `TOP_chunk`보다 큰 크기로 `malloc`하면 `TOP_chunk`가 `free`되고 다른 곳에 새로 생기는데 이렇게 억지로 만든 `free`로 `libc_leak`, `heap_leak`을 할 수 있어요.
 
-나중에 새로 생긴 `TOP_chunk`를 다른 값으로 덮어서 에러가 발생하도록 의도할건데 화면에 에러가 출력되는 과정이 [이 글](http://tech.c2w2m2.com/pwn/house-of-orange/)에 잘 설명돼 있어요.
+나중에 새로 생긴 `TOP_chunk`를 다른 값으로 덮어서 에러가 발생하도록 의도할건데 화면에 에러가 출력되는 과정은 [이 글](http://tech.c2w2m2.com/pwn/house-of-orange/)에 잘 설명돼 있어요.
 
 {: refdef: style="text-align: center;"}
 ![_IO_flush_all_lookup](/img/2016_hitcon-ctf/house_of_orange/02.png)
@@ -137,7 +137,7 @@ struct _IO_FILE
 
 > https://code.woboq.org/userspace/glibc/libio/bits/types/struct_FILE.h.html#_IO_FILE
 
-~~위 사이트에선 *_lock까지만 _IO_FILE이고 그 다음은 _IO_FILE_complete 부분에 정의됐는데 그건 왜 그런지 모르겠음~~
+~~위 사이트에선 *_lock까지만 _IO_FILE이고 그 다음은 _IO_FILE_complete 부분에 정의됐는데 그건 왜 그런지 모르겠음 버전이 다른가?~~
 
 근데 이렇게 보면 `_chain`이 정확히 어디있는지 잘 모르니까 `gdb`를 써서 정확한 위치를 찾을 거에요.
 
@@ -153,7 +153,7 @@ struct _IO_FILE
 
 > https://code.woboq.org/userspace/glibc/libio/libioP.h.html#_IO_list_all
 
-근데 `_IO_list_all`은 `_IO_FILE_plus` 구조를 가져요.
+근데 `_IO_list_all`은 `_IO_FILE_plus` 구조를 가져요.<br /><br />
 
 > https://code.woboq.org/userspace/glibc/libio/libioP.h.html#_IO_FILE_plus
 
@@ -172,7 +172,8 @@ struct _IO_jump_t
 
 다시 위에 `if`문을 보면 `_IO_OVERFLOW`를 실행시키려면 조건이 있어여.
 
-> `fp->_mode <= 0 && fp->_IO_write_ptr > fp->_IO_write_base` or `_IO_vtable_offset (fp) == 0 && fp->_mode > 0 && fp->_wide_data->_IO_write_ptr > fp->_wide_data->_IO_write_base
+> 1. `fp->_mode <= 0 && fp->_IO_write_ptr > fp->_IO_write_base`
+2. `_IO_vtable_offset (fp) == 0 && fp->_mode > 0 && fp->_wide_data->_IO_write_ptr > fp->_wide_data->_IO_write_base`
 
 조건은 두 가지중 하나만 만족하면 돼요. 누가봐도 쉬워보이는 앞에 조건으로 할게요.
 
@@ -209,7 +210,7 @@ struct _IO_jump_t
 ![overwite_chain](/img/2016_hitcon-ctf/house_of_orange/06.png)
 {: refdef}
 
-`TOP_chunk`를 덮고 `malloc`을 했울 때 모습인데 `_chain`에 `TOP_chunk`의 주소가 들어간걸 볼 수 있어요. 그래서 원래 `TOP_chunk`가 있는 곳에 `fake_IO_FILE`을 만들어주고 나머진 조건에 맞게 쓱쓱 해주면 풀려요.
+`TOP_chunk`를 덮고 `malloc`을 했을 때 모습인데 `_chain`에 `TOP_chunk`의 주소가 들어간걸 볼 수 있어요. 그래서 원래 `TOP_chunk`가 있는 곳에 `fake_IO_FILE`을 만들어주고 나머진 조건에 맞게 쓱쓱 해주면 풀려요.
 
 - - -
 # 0x04. 익스플로잇
