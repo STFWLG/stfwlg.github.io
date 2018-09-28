@@ -25,14 +25,14 @@ hoyoyoyoyoyoyoyo
 
 두 `entry`를 합치는 코드인데 코드 자체는 잘 짰으나 `from_entry`와 `to_entry`가 같은지 검사하지 않아요.
 
-`realloc`을 하는데 `realloc`을 하고도 같은 `chunk`를 가리켜야 하니까 `len`은 `0x44`이하로 해야한다. 그럼 `free`를 하고도 `entry_list`엔 주소가 남아있어서 **uaf**가 발생해요.
+`realloc`을 하는데 `realloc`을 하고도 같은 `chunk`를 가리켜야 하니까 `len`은 `0x44`이하로 해야해요. 그럼 `free`를 하고도 `entry_list`엔 주소가 남아있어서 **uaf**가 발생해요.
 
-나머진 귀찮다. 으어어어
+나머진 귀찮 으어어어
 
 - - -
 # 0x01. 공격 방법
 
-`unsorted_bin_attack`을 하면 원하는 주소에 `main_arena+88`의 주소를 넣을 수 있다. 이게 `libc_leak` 정도만 쓰일 줄 알았는데 이 문제는 좀 띠용하게 사용했어요.
+`unsorted_bin_attack`을 하면 원하는 주소에 `main_arena+88`의 주소를 넣을 수 있어요. 이게 `libc_leak` 정도만 쓰일 줄 알았는데 이 문제는 좀 띠용하게 사용했어요.
 
 `fastbin`의 범위는 `global_max_fast`보다 작은 크기라서 기본적으론 `0x80`인가 들어있어요. 그런데 `unsorted_bin_attack`으로  `main_arena+88`을 넣어버리면 거의 모든 `chunk`를 `fastbin` 마냥 사용할 수 있어요.
 
