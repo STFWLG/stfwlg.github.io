@@ -7,8 +7,7 @@ tags: rotles98
 ---
 
 >### My teammate, Orange, need a house. Can you build it ? nc 52.68.192.99 56746
-[house_of_orange](https://github.com/ctfs/write-ups-2016/raw/master/hitcon-ctf-2016/pwn/house-of-orange-500/houseoforange_22785bece84189e632567da38e4be0e0c4bb1682)
-[libc.so.6](https://github.com/ctfs/write-ups-2016/raw/master/hitcon-ctf-2016/pwn/house-of-orange-500/libc.so.6_375198810bb39e6593a968fcbcf6556789026743)
+[house_of_orange](https://github.com/ctfs/write-ups-2016/raw/master/hitcon-ctf-2016/pwn/house-of-orange-500/houseoforange_22785bece84189e632567da38e4be0e0c4bb1682) [libc.so.6](https://github.com/ctfs/write-ups-2016/raw/master/hitcon-ctf-2016/pwn/house-of-orange-500/libc.so.6_375198810bb39e6593a968fcbcf6556789026743)
 
 `selfmade orange! Ooh! Ooh!`
 
