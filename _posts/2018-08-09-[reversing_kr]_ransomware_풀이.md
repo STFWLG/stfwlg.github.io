@@ -3,7 +3,7 @@ layout: post
 title: "[reversing.kr] ransomware 풀이"
 date: 2018-08-09 14:00
 categories: "[Rev]reversing.kr"
-tags: "#UnKN0wn"
+tags: "N0N4M3D"
 ---
 
 # ransomware - [120pt]
