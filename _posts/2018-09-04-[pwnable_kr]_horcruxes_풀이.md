@@ -3,7 +3,7 @@ layout: post
 title: "[pwnable.kr] horcruxes 풀이"
 date: 2018-09-04 19:01
 categories: "[Pwn]pwnable.kr"
-tags: "#UnKN0wn"
+tags: "N0N4M3D"
 ---
 >## horcruxes - [7pt]
 ### Voldemort concealed his splitted soul inside 7 horcruxes.
