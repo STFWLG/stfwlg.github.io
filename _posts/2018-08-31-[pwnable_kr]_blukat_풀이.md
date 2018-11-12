@@ -3,7 +3,7 @@ layout: post
 title: "[pwnable.kr] blukat 풀이"
 date: 2018-08-31 13:43
 categories: "[Pwn]pwnable.kr"
-tags: "#UnKN0wn"
+tags: "N0N4M3D"
 ---
 >## blukat - [3pt]
 ### Sometimes, pwnable is strange...
